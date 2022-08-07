@@ -1,5 +1,5 @@
 {
-    "name"         :  "assertion",
+    "name"         :  "hassert",
     "url"          :  "https://github.com/protocubo/assertion.hx",
     "license"      :  "BSD",
     "tags"         :  ["cross"],

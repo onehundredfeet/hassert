@@ -3,13 +3,13 @@ import haxe.macro.Expr;
 using haxe.macro.ExprTools;
 
 @:dce
-class Assertion {
+//class Assertion {
 #if macro
-	public static var NO_ASSERT = "ASSERTION_NO_ASSERT";
-	public static var NO_WEAK_ASSERT = "ASSERTION_NO_WEAK_ASSERT";
-	public static var NO_SHOW = "ASSERTION_NO_SHOW";
+	 var NO_ASSERT = "ASSERTION_NO_ASSERT";
+	 var NO_WEAK_ASSERT = "ASSERTION_NO_WEAK_ASSERT";
+	 var NO_SHOW = "ASSERTION_NO_SHOW";
 
-	static function prepareTraces(v:Expr)
+	function prepareTraces(v:Expr)
 	{
 		return switch v.expr {
 		case EConst(c) if (!c.match(CIdent(_))): macro { expr:null, rawValue:($v:Dynamic), value:""+$v };
@@ -17,11 +17,11 @@ class Assertion {
 		}
 	}
 #end
-	public static var enableAssert = true;
-	public static var enableWeakAssert = true;
-	public static var enableShow = true;
+	 var enableAssert = true;
+	 var enableWeakAssert = true;
+	 var enableShow = true;
 
-	public static macro function assert(cond:ExprOf<Bool>, traces:Array<Expr>):ExprOf<Void>
+	 macro function assert(cond:ExprOf<Bool>, traces:Array<Expr>):ExprOf<Void>
 	{
 		if (Context.defined(NO_ASSERT)) return macro {};
 		var pos = Context.currentPos();
@@ -34,7 +34,7 @@ class Assertion {
 		};
 	}
 
-	public static macro function weakAssert(cond:ExprOf<Bool>, traces:Array<Expr>):ExprOf<Void>
+	 macro function weakAssert(cond:ExprOf<Bool>, traces:Array<Expr>):ExprOf<Void>
 	{
 		if (Context.defined(NO_ASSERT) || Context.defined(NO_WEAK_ASSERT)) return macro {};
 		var pos = Context.currentPos();
@@ -46,7 +46,7 @@ class Assertion {
 		};
 	}
 
-	public static macro function show(exprs:Array<Expr>):ExprOf<Void>
+	 macro function show(exprs:Array<Expr>):ExprOf<Void>
 	{
 		if (Context.defined(NO_SHOW)) return macro {};
 		var pos = Context.currentPos();
@@ -57,5 +57,5 @@ class Assertion {
 			}
 		};
 	}
-}
+//}
 
